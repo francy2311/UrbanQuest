@@ -1,0 +1,22 @@
+<header class="site-header">
+  <div class="container header-content">
+    <a class="logo" href="/">UrbanQuest</a>
+
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/missions">Missioni</a>
+      <a href="/missions/map">Mappa</a>
+      <a href="/leaderboard">Classifica</a>
+
+      {{#if currentUser}}
+      <a href="/dashboard">Dashboard</a>
+      <form class="inline-form" action="/logout" method="post">
+        <button type="submit">Logout</button>
+      </form>
+      {{else}}
+      <a href="/login">Login</a>
+      <a class="btn-small" href="/register">Registrati</a>
+      {{/if}}
+    </nav>
+  </div>
+</header>

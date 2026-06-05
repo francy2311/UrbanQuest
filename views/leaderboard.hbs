@@ -1,0 +1,43 @@
+<section class="page-header">
+  <h1>Classifica</h1>
+  <p>
+    Gli utenti vengono ordinati in base ai punti ottenuti completando missioni approvate.
+  </p>
+</section>
+
+{{#if users}}
+<section class="leaderboard-card">
+  <div class="leaderboard-header">
+    <span>Posizione</span>
+    <span>Utente</span>
+    <span>Punti</span>
+  </div>
+
+  {{#each users}}
+  <div class="leaderboard-row">
+    <div class="leaderboard-position">
+      #{{inc @index}}
+    </div>
+
+    <div class="leaderboard-user">
+      <div class="avatar">
+        {{initial name}}
+      </div>
+
+      <div>
+        <strong>{{name}}</strong>
+        <p>{{email}}</p>
+      </div>
+    </div>
+
+    <div class="leaderboard-points">
+      {{points}} pt
+    </div>
+  </div>
+  {{/each}}
+</section>
+{{else}}
+<div class="empty-state">
+  <p>Non ci sono ancora utenti in classifica.</p>
+</div>
+{{/if}}

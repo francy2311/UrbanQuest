@@ -1,0 +1,45 @@
+<section class="page-header narrow-page">
+  <p class="eyebrow-dark">Completamento missione</p>
+  <h1>Invia prova</h1>
+  <p>
+    Descrivi cosa hai fatto per completare la missione.
+    Puoi anche caricare una foto come prova visiva.
+  </p>
+</section>
+
+<section class="form-card form-card-centered">
+  <form
+    action="/participations/{{participation.id}}/proof"
+    method="post"
+    enctype="multipart/form-data"
+    class="form"
+  >
+    <div class="form-group">
+      <label for="text">Prova testuale *</label>
+      <textarea
+        id="text"
+        name="text"
+        placeholder="Es. Ho completato la missione trovando il luogo richiesto e descrivendo..."
+        required
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="image">Foto prova</label>
+      <input
+        type="file"
+        id="image"
+        name="image"
+        accept=".jpg,.jpeg,.png,.webp"
+      >
+      <small class="form-help">
+        Formati consentiti: JPG, JPEG, PNG, WEBP. Dimensione massima: 2 MB.
+      </small>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn" type="submit">Invia prova</button>
+      <a class="btn-secondary" href="/dashboard/my-participations">Annulla</a>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,48 @@
+<section class="page-header">
+  <h1>Missioni accettate</h1>
+  <p>
+    Qui trovi le missioni che hai accettato. Puoi controllare lo stato e inviare la prova di completamento.
+  </p>
+</section>
+
+{{#if participations}}
+  <section class="missions-grid">
+    {{#each participations}}
+      <article class="mission-card">
+        <h2>{{title}}</h2>
+
+        <p>{{description}}</p>
+
+        <div class="mission-meta">
+          {{#if category_name}}
+            <span class="badge">{{category_name}}</span>
+          {{else}}
+            <span class="badge">Senza categoria</span>
+          {{/if}}
+
+          <span class="badge badge-green">{{points}} punti</span>
+          <span class="badge badge-yellow">{{difficulty}}</span>
+          <span class="badge">{{status}}</span>
+        </div>
+
+        <p>
+          <strong>Zona:</strong> {{zone}}
+        </p>
+
+        <div class="card-actions">
+          <a class="btn-secondary" href="/missions/{{mission_id}}">Dettagli</a>
+
+          {{#if (eq status "accepted")}}
+            <a class="btn" href="/participations/{{id}}/proof">Invia prova</a>
+          {{/if}}
+        </div>
+      </article>
+    {{/each}}
+  </section>
+{{else}}
+  <div class="empty-state">
+    <p>Non hai ancora accettato nessuna missione.</p>
+    <a class="btn" href="/missions">Esplora missioni</a>
+  </div>
+{{/if}}
+

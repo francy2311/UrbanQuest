@@ -1,0 +1,118 @@
+<section class="page-header narrow-page">
+  <h1>Crea nuova missione</h1>
+  <p>
+    Pubblica una missione urbana indicando cosa deve fare l'utente,
+    in quale zona e quanti punti può ottenere.
+  </p>
+</section>
+
+<section class="form-card form-card-centered">
+  <form action="/missions/create" method="post" class="form">
+    <div class="form-group">
+      <label for="title">Titolo *</label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        placeholder="Es. Fotografa un murales urbano"
+        required
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="description">Descrizione *</label>
+      <textarea
+        id="description"
+        name="description"
+        placeholder="Descrivi chiaramente cosa deve fare l'utente per completare la missione"
+        required
+      ></textarea>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="categoryId">Categoria</label>
+        <select id="categoryId" name="categoryId">
+          <option value="">Nessuna categoria</option>
+          {{#each categories}}
+            <option value="{{id}}">{{name}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="difficulty">Difficoltà *</label>
+        <select id="difficulty" name="difficulty" required>
+          <option value="easy">Facile</option>
+          <option value="medium">Media</option>
+          <option value="hard">Difficile</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="zone">Zona *</label>
+        <input
+          type="text"
+          id="zone"
+          name="zone"
+          placeholder="Es. Campus Bovisa"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="address">Indirizzo</label>
+        <input
+          type="text"
+          id="address"
+          name="address"
+          placeholder="Es. Via La Masa, Milano"
+        >
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="latitude">Latitudine</label>
+        <input
+          type="number"
+          step="any"
+          id="latitude"
+          name="latitude"
+          placeholder="Es. 45.4642"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="longitude">Longitudine</label>
+        <input
+          type="number"
+          step="any"
+          id="longitude"
+          name="longitude"
+          placeholder="Es. 9.1900"
+        >
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="points">Punti *</label>
+      <input
+        type="number"
+        id="points"
+        name="points"
+        min="1"
+        max="200"
+        placeholder="Es. 40"
+        required
+      >
+    </div>
+
+    <div class="form-actions">
+      <button class="btn" type="submit">Crea missione</button>
+      <a class="btn-secondary" href="/missions">Annulla</a>
+    </div>
+  </form>
+</section>

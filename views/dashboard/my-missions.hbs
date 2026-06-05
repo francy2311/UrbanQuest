@@ -1,0 +1,195 @@
+<section class="page-header">
+  <h1>Missioni create</h1>
+  <p>
+    Qui puoi vedere le missioni che hai pubblicato e verificare le prove inviate dagli utenti.
+  </p>
+</section>
+
+<div class="page-actions">
+  <a class="btn" href="/missions/create">Crea nuova missione</a>
+  <a class="btn-secondary" href="/missions/map">Vedi mappa</a>
+</div>
+
+<section class="section-block">
+  <div class="section-heading">
+    <h2>Le tue missioni</h2>
+    <p>Elenco delle missioni che hai creato.</p>
+  </div>
+
+  {{#if createdMissions}}
+    <section class="missions-grid">
+      {{#each createdMissions}}
+        <article class="mission-card">
+          <h2>{{title}}</h2>
+
+          <p>{{description}}</p>
+
+          <div class="mission-meta">
+            {{#if category_name}}
+              <span class="badge">{{category_name}}</span>
+            {{else}}
+              <span class="badge">Senza categoria</span>
+            {{/if}}
+
+            <span class="badge badge-green">{{points}} punti</span>
+            <span class="badge badge-yellow">{{difficulty}}</span>
+            <span class="badge">{{status}}</span>
+          </div>
+
+          <p class="mission-zone">
+            <strong>Zona:</strong> {{zone}}
+          </p>
+
+          {{#if address}}
+            <p class="mission-zone">
+              <strong>Indirizzo:</strong> {{address}}
+            </p>
+          {{/if}}
+
+          <div class="card-actions">
+            <a class="btn-secondary" href="/missions/{{id}}">Dettagli</a>
+          </div>
+        </article>
+      {{/each}}
+    </section>
+  {{else}}
+    <div class="empty-state">
+      <p>Non hai ancora creato missioni.</p>
+    </div>
+  {{/if}}
+</section>
+
+<section class="section-block">
+  <div class="section-heading">
+    <h2>Prove in attesa</h2>
+    <p>Prove inviate dagli utenti che richiedono la tua verifica.</p>
+  </div>
+
+  {{#if pendingProofs}}
+    <section class="proofs-list">
+      {{#each pendingProofs}}
+        <article class="proof-card">
+          <div class="proof-header">
+            <div>
+              <p class="eyebrow-dark">Prova in attesa</p>
+              <h2>{{mission_title}}</h2>
+            </div>
+
+            <span class="badge badge-yellow">pending</span>
+          </div>
+
+          <div class="proof-info">
+            <p>
+              <strong>Utente:</strong>
+              {{participant_name}} — {{participant_email}}
+            </p>
+
+            <p>
+              <strong>Punti missione:</strong>
+              {{points}}
+            </p>
+
+            <p>
+              <strong>Data invio:</strong>
+              {{created_at}}
+            </p>
+          </div>
+
+          <div class="proof-text">
+            <strong>Prova inviata:</strong>
+            <p>{{text}}</p>
+          </div>
+
+          {{#if image_path}}
+            <div class="proof-image-box">
+              <strong>Foto inviata:</strong>
+              <img src="{{image_path}}" alt="Foto prova missione">
+            </div>
+          {{/if}}
+
+          <div class="proof-actions">
+            <form action="/proofs/{{id}}/approve" method="post">
+              <button class="btn" type="submit">Approva</button>
+            </form>
+
+            <form action="/proofs/{{id}}/reject" method="post">
+              <button class="btn-secondary" type="submit">Rifiuta</button>
+            </form>
+          </div>
+        </article>
+      {{/each}}
+    </section>
+  {{else}}
+    <div class="empty-state">
+      <p>Non ci sono prove in attesa di verifica per le tue missioni.</p>
+    </div>
+  {{/if}}
+</section>
+
+<section class="section-block">
+  <div class="section-heading">
+    <h2>Storico prove verificate</h2>
+    <p>Prove che hai già approvato o rifiutato.</p>
+  </div>
+
+  {{#if reviewedProofs}}
+    <section class="reviewed-list">
+      {{#each reviewedProofs}}
+        <article class="reviewed-card">
+          <div class="reviewed-header">
+            <div>
+              <p class="eyebrow-dark">Prova verificata</p>
+              <h2>{{mission_title}}</h2>
+            </div>
+
+            {{#if (eq status "approved")}}
+              <span class="badge badge-green">approved</span>
+            {{else}}
+              <span class="badge badge-red">rejected</span>
+            {{/if}}
+          </div>
+
+          <div class="proof-info">
+            <p>
+              <strong>Utente:</strong>
+              {{participant_name}} — {{participant_email}}
+            </p>
+
+            <p>
+              <strong>Punti missione:</strong>
+              {{points}}
+            </p>
+
+            <p>
+              <strong>Data invio:</strong>
+              {{created_at}}
+            </p>
+
+            {{#if reviewer_note}}
+              <p>
+                <strong>Esito:</strong>
+                {{reviewer_note}}
+              </p>
+            {{/if}}
+          </div>
+
+          <div class="proof-text">
+            <strong>Prova inviata:</strong>
+            <p>{{text}}</p>
+          </div>
+
+          {{#if image_path}}
+            <div class="proof-image-box">
+              <strong>Foto inviata:</strong>
+              <img src="{{image_path}}" alt="Foto prova missione">
+            </div>
+          {{/if}}
+        </article>
+      {{/each}}
+    </section>
+  {{else}}
+    <div class="empty-state">
+      <p>Non hai ancora verificato prove.</p>
+    </div>
+  {{/if}}
+</section>

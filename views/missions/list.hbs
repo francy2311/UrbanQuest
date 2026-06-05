@@ -1,0 +1,88 @@
+<section class="page-header">
+  <h1>Missioni disponibili</h1>
+  <p>
+    Esplora le missioni urbane pubblicate dagli utenti, filtrale e scegli una sfida da completare.
+  </p>
+</section>
+
+<section class="filter-panel">
+  <form action="/missions" method="get" class="filter-form">
+    <div class="form-group">
+      <label for="categoryId">Categoria</label>
+      <select id="categoryId" name="categoryId">
+        <option value="">Tutte</option>
+        {{#each categories}}
+        <option value="{{id}}">{{name}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="difficulty">Difficoltà</label>
+      <select id="difficulty" name="difficulty">
+        <option value="">Tutte</option>
+        <option value="easy">Facile</option>
+        <option value="medium">Media</option>
+        <option value="hard">Difficile</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="zone">Zona</label>
+      <input type="text" id="zone" name="zone" placeholder="Es. Bovisa, Centro, Isola" value="{{filters.zone}}">
+    </div>
+
+    <div class="filter-actions">
+      <button class="btn" type="submit">Filtra</button>
+      <a class="btn-secondary" href="/missions">Reset</a>
+    </div>
+  </form>
+</section>
+
+<div class="page-actions">
+  {{#if currentUser}}
+  <a class="btn" href="/missions/create">Crea nuova missione</a>
+  {{/if}}
+
+  <a class="btn-secondary" href="/missions/map">Vedi mappa</a>
+</div>
+
+{{#if missions}}
+<section class="missions-grid">
+  {{#each missions}}
+  <article class="mission-card">
+    <h2>{{title}}</h2>
+
+    <p>{{description}}</p>
+
+    <div class="mission-meta">
+      {{#if category_name}}
+      <span class="badge">{{category_name}}</span>
+      {{else}}
+      <span class="badge">Senza categoria</span>
+      {{/if}}
+
+      <span class="badge badge-green">{{points}} punti</span>
+      <span class="badge badge-yellow">{{difficulty}}</span>
+      <span class="badge">{{status}}</span>
+    </div>
+
+    <p class="mission-zone">
+      <strong>Zona:</strong> {{zone}}
+    </p>
+
+    <p class="mission-creator">
+      <strong>Creata da:</strong> {{creator_name}}
+    </p>
+
+    <div class="card-actions">
+      <a class="btn-secondary" href="/missions/{{id}}">Dettagli</a>
+    </div>
+  </article>
+  {{/each}}
+</section>
+{{else}}
+<div class="empty-state">
+  <p>Non ci sono missioni disponibili.</p>
+</div>
+{{/if}}

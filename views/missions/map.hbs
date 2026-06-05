@@ -1,0 +1,25 @@
+<section class="page-header">
+  <h1>Mappa missioni</h1>
+  <p>
+    Visualizza le missioni disponibili sulla mappa e apri il dettaglio di quelle che vuoi completare.
+  </p>
+</section>
+
+<section class="map-card">
+  <div id="missions-map"></div>
+</section>
+
+<script>
+  window.URBANQUEST_MISSIONS = {{{missionsJson}}};
+</script>
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+<script src="/js/map.js"></script>

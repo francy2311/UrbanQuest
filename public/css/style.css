@@ -1,0 +1,1216 @@
+/* =========================================================
+   URBANQUEST - STYLE.CSS
+   Stile generale dell'applicazione TIW
+   ========================================================= */
+
+
+/* =========================================================
+   1. RESET E VARIABILI GLOBALI
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Colori principali */
+  --bg: #eef4fb;
+  --bg-soft: #f8fbff;
+  --dark: #0f172a;
+  --dark-2: #111827;
+  --blue: #2563eb;
+  --blue-2: #38bdf8;
+  --blue-dark: #1d4ed8;
+
+  /* Testi e bordi */
+  --text: #172033;
+  --muted: #64748b;
+  --border: #dbe3ef;
+  --white: #ffffff;
+
+  /* Messaggi */
+  --success-bg: #dcfce7;
+  --success-text: #166534;
+  --error-bg: #fee2e2;
+  --error-text: #991b1b;
+
+  /* Ombre */
+  --shadow: 0 20px 60px rgba(15, 23, 42, 0.10);
+  --shadow-soft: 0 10px 35px rgba(15, 23, 42, 0.07);
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  color: var(--text);
+
+  /* Sfondo chiaro con gradienti leggeri */
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 35%),
+    radial-gradient(circle at top right, rgba(37, 99, 235, 0.16), transparent 32%),
+    linear-gradient(180deg, #f5f9ff 0%, #eef4fb 100%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+.container {
+  width: min(1120px, 92%);
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   2. HEADER E NAVBAR
+   ========================================================= */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(15, 23, 42, 0.96);
+  color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.header-content {
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: 900;
+  letter-spacing: -0.7px;
+}
+
+/* Piccolo simbolo prima del logo */
+.logo::before {
+  content: "◆";
+  color: var(--blue-2);
+  font-size: 15px;
+  margin-right: 9px;
+  vertical-align: 2px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav a {
+  font-size: 15px;
+  font-weight: 800;
+  opacity: 0.9;
+  padding: 9px 12px;
+  border-radius: 999px;
+  transition: 0.18s ease;
+}
+
+.nav a:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.10);
+}
+
+/* Bottone registrazione nella navbar */
+.nav .btn-small {
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+  color: #082f49;
+  opacity: 1;
+  padding: 9px 15px;
+  box-shadow: 0 8px 22px rgba(56, 189, 248, 0.28);
+}
+
+/* Form inline usato per logout */
+.inline-form {
+  margin: 0;
+}
+
+.inline-form button {
+  border: none;
+  background: #ef4444;
+  color: white;
+  padding: 9px 13px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   3. BOTTONI GENERALI
+   ========================================================= */
+
+.btn,
+.btn-secondary,
+.btn-small {
+  border: none;
+  cursor: pointer;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.btn {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  padding: 13px 20px;
+  border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.28);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 36px rgba(37, 99, 235, 0.35);
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--text);
+  padding: 13px 20px;
+  border-radius: 14px;
+  border: 1px solid #d0d7e2;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-1px);
+  background: #f8fafc;
+}
+
+.btn-small {
+  border-radius: 999px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+
+/* =========================================================
+   4. HOME PAGE
+   ========================================================= */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  margin-top: 46px;
+  padding: 82px 46px;
+  border-radius: 34px;
+  color: white;
+  box-shadow: var(--shadow);
+
+  background:
+    radial-gradient(circle at 85% 20%, rgba(56, 189, 248, 0.26), transparent 28%),
+    radial-gradient(circle at 20% 90%, rgba(30, 64, 175, 0.55), transparent 36%),
+    linear-gradient(135deg, #0f172a 0%, #1e3a8a 48%, #2563eb 100%);
+}
+
+/* Cerchio decorativo nel blocco hero */
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  right: -120px;
+  bottom: -180px;
+  background: rgba(255, 255, 255, 0.09);
+  border-radius: 50%;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+
+.eyebrow {
+  color: #93c5fd;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  margin: 0 0 14px;
+}
+
+.hero h1 {
+  max-width: 720px;
+  font-size: clamp(42px, 5.4vw, 68px);
+  line-height: 1.02;
+  margin: 0;
+  letter-spacing: -2.2px;
+}
+
+.hero-text {
+  max-width: 760px;
+  margin-top: 24px;
+  font-size: 19px;
+  color: #dbeafe;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 34px 0 42px;
+}
+
+.card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(219, 227, 239, 0.95);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(10px);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.12);
+}
+
+/* Linea decorativa sopra le card */
+.card::before {
+  content: "";
+  display: block;
+  width: 42px;
+  height: 5px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2563eb, #38bdf8);
+  margin-bottom: 18px;
+}
+
+.card h2 {
+  margin: 0 0 12px;
+  font-size: 25px;
+  letter-spacing: -0.7px;
+}
+
+.card p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   5. STRUTTURA PAGINE GENERICHE
+   ========================================================= */
+
+.page-header {
+  margin: 44px 0 24px;
+}
+
+.page-header h1 {
+  font-size: 42px;
+  margin: 0 0 10px;
+  letter-spacing: -1.2px;
+}
+
+.page-header p {
+  max-width: 760px;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 17px;
+}
+
+/* Usata per centrare pagine strette, ad esempio creazione missione */
+.narrow-page {
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.empty-state {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px dashed #94a3b8;
+  border-radius: 22px;
+  padding: 32px;
+  color: #475569;
+  box-shadow: var(--shadow-soft);
+}
+
+.empty-state .btn {
+  margin-top: 14px;
+}
+
+
+/* =========================================================
+   6. MESSAGGI FLASH
+   ========================================================= */
+
+.alert {
+  margin-top: 22px;
+  padding: 15px 17px;
+  border-radius: 14px;
+  font-weight: 800;
+}
+
+.alert-success {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+.alert-error {
+  background: var(--error-bg);
+  color: var(--error-text);
+}
+
+
+/* =========================================================
+   7. PAGINE LOGIN / REGISTRAZIONE
+   ========================================================= */
+
+.auth-page {
+  min-height: calc(100vh - 160px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 54px 0;
+}
+
+.auth-card {
+  position: relative;
+  width: min(470px, 100%);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(219, 227, 239, 0.95);
+  border-radius: 28px;
+  padding: 38px;
+  box-shadow: 0 28px 80px rgba(15, 23, 42, 0.13);
+  backdrop-filter: blur(14px);
+}
+
+/* Linea colorata superiore della card */
+.auth-card::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 34px;
+  right: 34px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2563eb, #38bdf8);
+}
+
+.auth-card h1 {
+  margin: 0 0 10px;
+  font-size: 38px;
+  letter-spacing: -1.2px;
+}
+
+.auth-card > p {
+  color: var(--muted);
+  margin: 0 0 30px;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.auth-switch {
+  margin: 24px 0 0;
+  text-align: center;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.auth-switch a {
+  color: var(--blue);
+  font-weight: 900;
+}
+
+.test-credentials {
+  margin-top: 24px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 16px 18px;
+  color: #475569;
+  font-size: 14px;
+}
+
+.test-credentials strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #334155;
+}
+
+.test-credentials p {
+  margin: 5px 0;
+}
+
+
+/* =========================================================
+   8. FORM GENERALI
+   ========================================================= */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-card {
+  width: min(820px, 100%);
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 34px;
+  box-shadow: var(--shadow-soft);
+}
+
+.form-card-centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 900;
+  color: #1e293b;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 14px;
+  padding: 13px 15px;
+  font-size: 15px;
+  outline: none;
+  background: white;
+  color: var(--text);
+  transition: border-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #a0aec0;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 6px;
+}
+
+
+/* =========================================================
+   9. DASHBOARD
+   ========================================================= */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 26px;
+}
+
+.dashboard-card {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: var(--shadow-soft);
+}
+
+.dashboard-card h2 {
+  margin: 0 0 12px;
+  letter-spacing: -0.5px;
+}
+
+.dashboard-card p {
+  color: #475569;
+  line-height: 1.5;
+}
+
+.stat-number {
+  font-size: 52px;
+  font-weight: 950;
+  color: var(--blue);
+  margin: 8px 0;
+}
+
+
+/* =========================================================
+   10. MISSIONI - LISTA, FILTRI, CARD
+   ========================================================= */
+
+.filter-panel {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 24px;
+  margin-bottom: 26px;
+  box-shadow: var(--shadow-soft);
+}
+
+.filter-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 16px;
+  align-items: end;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.page-actions {
+  margin: 22px 0;
+}
+
+.missions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 26px;
+}
+
+.mission-card {
+  background: rgba(255, 255, 255, 0.90);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 26px;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.mission-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.12);
+}
+
+.mission-card h2 {
+  margin: 0 0 10px;
+  letter-spacing: -0.6px;
+}
+
+.mission-card p {
+  color: #475569;
+  line-height: 1.5;
+}
+
+.mission-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.mission-zone,
+.mission-creator {
+  color: #475569;
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+
+/* =========================================================
+   11. BADGE / ETICHETTE
+   ========================================================= */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: #e0f2fe;
+  color: #075985;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.badge-green {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-yellow {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.badge-red {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+
+/* =========================================================
+   12. DETTAGLIO MISSIONE
+   ========================================================= */
+
+.detail-card {
+  background: rgba(255, 255, 255, 0.90);
+  border: 1px solid var(--border);
+  border-radius: 26px;
+  padding: 30px;
+  box-shadow: var(--shadow-soft);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 34px;
+  margin-top: 24px;
+}
+
+.detail-grid h2 {
+  margin-top: 0;
+}
+
+.detail-grid p {
+  line-height: 1.6;
+  color: #475569;
+}
+
+
+/* =========================================================
+   13. PAGINE ERRORE
+   ========================================================= */
+
+.error-page {
+  margin: 90px auto;
+  max-width: 620px;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 28px;
+  padding: 46px;
+  text-align: center;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.error-page h1 {
+  font-size: 82px;
+  margin: 0;
+  letter-spacing: -3px;
+}
+
+
+/* =========================================================
+   14. FOOTER
+   ========================================================= */
+
+.site-footer {
+  margin-top: 70px;
+  padding: 28px 0 34px;
+  color: #64748b;
+  text-align: center;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   15. RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 950px) {
+  .cards,
+  .dashboard-grid,
+  .missions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-form,
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 62px 32px;
+  }
+}
+
+@media (max-width: 760px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 720px) {
+  .header-content {
+    height: auto;
+    padding: 16px 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+  }
+
+  .hero {
+    margin-top: 28px;
+    padding: 46px 24px;
+    border-radius: 26px;
+  }
+
+  .hero h1 {
+    font-size: 40px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .btn,
+  .btn-secondary {
+    width: 100%;
+  }
+
+  .auth-card {
+    padding: 30px 24px;
+  }
+
+  .auth-card h1 {
+    font-size: 34px;
+  }
+}
+
+.eyebrow-dark {
+  margin: 0 0 10px;
+  color: var(--blue);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+.detail-card-centered {
+  width: min(920px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.action-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 22px;
+}
+
+.info-box {
+  background: #eff6ff;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   16. CLASSIFICA
+   ========================================================= */
+
+.leaderboard-card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 20px;
+  box-shadow: var(--shadow-soft);
+}
+
+.leaderboard-header,
+.leaderboard-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 120px;
+  align-items: center;
+  gap: 18px;
+}
+
+.leaderboard-header {
+  padding: 12px 18px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.leaderboard-row {
+  padding: 18px;
+  border-radius: 20px;
+  background: #f8fafc;
+  margin-top: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+.leaderboard-position {
+  font-size: 22px;
+  font-weight: 950;
+  color: var(--blue);
+}
+
+.leaderboard-user {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.leaderboard-user p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  color: white;
+  font-weight: 950;
+  font-size: 20px;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.22);
+}
+
+.leaderboard-points {
+  justify-self: end;
+  font-size: 22px;
+  font-weight: 950;
+  color: #166534;
+}
+
+@media (max-width: 720px) {
+  .leaderboard-header {
+    display: none;
+  }
+
+  .leaderboard-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .leaderboard-points {
+    justify-self: start;
+  }
+}
+
+/* =========================================================
+   17. BADGE UTENTE
+   ========================================================= */
+
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 24px;
+}
+
+.badge-card {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: var(--shadow-soft);
+}
+
+.badge-card h2 {
+  margin: 0 0 8px;
+  letter-spacing: -0.5px;
+}
+
+.badge-card p {
+  margin: 0 0 14px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.badge-icon {
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #facc15, #f97316);
+  color: white;
+  font-size: 28px;
+  font-weight: 950;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 28px rgba(249, 115, 22, 0.25);
+}
+
+@media (max-width: 950px) {
+  .badges-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* =========================================================
+   18. UPLOAD IMMAGINE PROVA
+   ========================================================= */
+
+.form-help {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.proof-image-box {
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 18px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.proof-image-box strong {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.proof-image-box img {
+  width: 100%;
+  max-width: 520px;
+  border-radius: 16px;
+  border: 1px solid #dbe3ef;
+  box-shadow: var(--shadow-soft);
+  display: block;
+}
+/* =========================================================
+   19. MAPPA MISSIONI
+   ========================================================= */
+
+.map-card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 18px;
+  box-shadow: var(--shadow-soft);
+}
+
+#missions-map {
+  width: 100%;
+  height: 560px;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid #dbe3ef;
+}
+
+.leaflet-popup-content {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+/* =========================================================
+   20. SEZIONI DASHBOARD MISSIONI CREATE
+   ========================================================= */
+
+.section-block {
+  margin-top: 42px;
+}
+
+.section-heading {
+  margin-bottom: 18px;
+}
+
+.section-heading h2 {
+  margin: 0 0 8px;
+  font-size: 32px;
+  letter-spacing: -0.9px;
+}
+
+.section-heading p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+/* =========================================================
+   21. PROVE IN ATTESA - CARD VERIFICA
+   ========================================================= */
+
+.proofs-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  margin-top: 22px;
+}
+
+.proof-card {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--border);
+  border-radius: 26px;
+  padding: 28px;
+  box-shadow: var(--shadow-soft);
+  max-width: 920px;
+}
+
+.proof-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.proof-header h2 {
+  margin: 0;
+  font-size: 26px;
+  letter-spacing: -0.6px;
+}
+
+.proof-info {
+  margin-top: 14px;
+  color: #475569;
+}
+
+.proof-info p {
+  margin: 8px 0;
+}
+
+.proof-text {
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 18px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.proof-text strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.proof-text p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.proof-image-box {
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 18px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.proof-image-box strong {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.proof-image-box img {
+  width: 100%;
+  max-width: 520px;
+  border-radius: 16px;
+  border: 1px solid #dbe3ef;
+  box-shadow: var(--shadow-soft);
+  display: block;
+}
+
+.proof-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.proof-actions form {
+  margin: 0;
+}
+
+/* =========================================================
+   22. STORICO PROVE VERIFICATE
+   ========================================================= */
+
+.reviewed-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  margin-top: 22px;
+}
+
+.reviewed-card {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--border);
+  border-radius: 26px;
+  padding: 28px;
+  box-shadow: var(--shadow-soft);
+  max-width: 920px;
+}
+
+.reviewed-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.reviewed-header h2 {
+  margin: 0;
+  font-size: 26px;
+  letter-spacing: -0.6px;
+}

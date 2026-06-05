@@ -1,0 +1,54 @@
+<section class="page-header">
+  <h1>Dashboard</h1>
+  <p>
+    Ciao {{currentUser.name}}, da qui puoi gestire le tue missioni, controllare i progressi
+    e vedere i badge ottenuti.
+  </p>
+</section>
+
+<section class="dashboard-grid">
+  <article class="dashboard-card">
+    <h2>I tuoi punti</h2>
+    <p class="stat-number">{{user.points}}</p>
+    <p>Punti ottenuti completando missioni approvate.</p>
+  </article>
+
+  <article class="dashboard-card">
+    <h2>Missioni create</h2>
+    <p>Visualizza le prove ricevute per le missioni che hai pubblicato.</p>
+    <a class="btn-secondary" href="/dashboard/my-missions">Vai alle missioni</a>
+  </article>
+
+  <article class="dashboard-card">
+    <h2>Missioni accettate</h2>
+    <p>Controlla le missioni che hai accettato e invia le prove.</p>
+    <a class="btn-secondary" href="/dashboard/my-participations">Vai alle partecipazioni</a>
+  </article>
+</section>
+
+<section class="page-header">
+  <h1>Badge ottenuti</h1>
+  <p>
+    I badge vengono assegnati automaticamente quando raggiungi determinate soglie di punti.
+  </p>
+</section>
+
+{{#if badges}}
+  <section class="badges-grid">
+    {{#each badges}}
+      <article class="badge-card">
+        <div class="badge-icon">★</div>
+
+        <div>
+          <h2>{{name}}</h2>
+          <p>{{description}}</p>
+          <span class="badge badge-green">{{required_points}} punti</span>
+        </div>
+      </article>
+    {{/each}}
+  </section>
+{{else}}
+  <div class="empty-state">
+    <p>Non hai ancora ottenuto badge. Completa missioni approvate per sbloccarli.</p>
+  </div>
+{{/if}}
