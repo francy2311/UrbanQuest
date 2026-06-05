@@ -175,6 +175,34 @@ router.post('/missions/:id/accept', requireAuth, (req, res) => {
 });
 
 /* =========================
+   PARTECIPANTI MISSIONE
+   Visibile solo al creatore
+========================= */
+
+router.get('/missions/:id/participants', requireAuth, (req, res) => {
+  const missionId = Number(req.params.id);
+  const mission = missionRepository.findById(missionId);
+
+  if (!mission) {
+    req.session.error = 'Missione non trovata.';
+    return res.redirect('/dashboard/my-missions');
+  }
+
+  if (mission.creator_id !== req.session.user.id) {
+    req.session.error = 'Non puoi vedere i partecipanti di una missione non tua.';
+    return res.redirect('/dashboard/my-missions');
+  }
+
+  const participants = participationRepository.findByMissionIdForCreator(missionId);
+
+  res.render('missions/participants', {
+    title: 'Partecipanti missione',
+    mission,
+    participants
+  });
+});
+
+/* =========================
    DETTAGLIO MISSIONE
    Deve stare DOPO le rotte specifiche
 ========================= */

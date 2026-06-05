@@ -8,6 +8,7 @@ const dashboardRoutes = require('./routes/dashboardRoutes');
 const missionRoutes = require('./routes/missionRoutes');
 const proofRoutes = require('./routes/proofRoutes');
 const leaderboardRoutes = require('./routes/leaderboardRoutes');
+const qrRoutes = require('./routes/qrRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -103,7 +104,7 @@ app.use(dashboardRoutes);
 app.use(missionRoutes);
 app.use(proofRoutes);
 app.use(leaderboardRoutes);
-
+app.use(qrRoutes);
 
 
 /* =========================

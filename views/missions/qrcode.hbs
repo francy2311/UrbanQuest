@@ -1,0 +1,31 @@
+<section class="page-header narrow-page">
+  <p class="eyebrow-dark">QR Code missione</p>
+  <h1>{{mission.title}}</h1>
+  <p>
+    Scansiona il QR code per aprire rapidamente il dettaglio della missione.
+  </p>
+</section>
+
+<section class="qr-card">
+  <div class="qr-box">
+    <img src="{{qrCodeDataUrl}}" alt="QR Code missione">
+  </div>
+
+  <div class="qr-info">
+    <h2>Condividi questa missione</h2>
+
+    <p>
+      Questo QR code porta direttamente alla pagina dettaglio della missione.
+      Può essere mostrato, condiviso o stampato.
+    </p>
+
+    <div class="qr-link-box">
+      {{missionUrl}}
+    </div>
+
+    <div class="form-actions">
+      <a class="btn" href="/missions/{{mission.id}}">Torna alla missione</a>
+      <a class="btn-secondary" href="/missions">Tutte le missioni</a>
+    </div>
+  </div>
+</section>

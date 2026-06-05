@@ -54,11 +54,36 @@ function updateStatus(id, status) {
     WHERE id = ?
   `).run(status, id);
 }
+function findByMissionIdForCreator(missionId) {
+  return db.prepare(`
+    SELECT
+      mission_participations.id,
+      mission_participations.status,
+      mission_participations.created_at,
+      mission_participations.updated_at,
 
+      users.id AS user_id,
+      users.name AS user_name,
+      users.email AS user_email,
+      users.points AS user_points,
+
+      proofs.id AS proof_id,
+      proofs.text AS proof_text,
+      proofs.image_path AS proof_image_path,
+      proofs.status AS proof_status,
+      proofs.created_at AS proof_created_at
+    FROM mission_participations
+    JOIN users ON users.id = mission_participations.user_id
+    LEFT JOIN proofs ON proofs.participation_id = mission_participations.id
+    WHERE mission_participations.mission_id = ?
+    ORDER BY mission_participations.created_at DESC
+  `).all(missionId);
+}
 module.exports = {
   findByMissionAndUser,
   create,
   findById,
   findByUserId,
-  updateStatus
+  updateStatus,
+  findByMissionIdForCreator
 };

@@ -1,75 +1,93 @@
 <section class="page-header narrow-page">
   <p class="eyebrow-dark">Dettaglio missione</p>
   <h1>{{mission.title}}</h1>
-  <p>{{mission.description}}</p>
+  <p>
+    Visualizza i dettagli della missione, accettala se sei loggato oppure condividila tramite QR code.
+  </p>
 </section>
 
 <section class="detail-card detail-card-centered">
-  <div class="mission-meta">
-    {{#if mission.category_name}}
-    <span class="badge">{{mission.category_name}}</span>
-    {{else}}
-    <span class="badge">Senza categoria</span>
-    {{/if}}
-
-    <span class="badge badge-green">{{mission.points}} punti</span>
-    <span class="badge badge-yellow">{{mission.difficulty}}</span>
-    <span class="badge">{{mission.status}}</span>
-  </div>
-
   <div class="detail-grid">
     <div>
-      <h2>Informazioni missione</h2>
+      <h2>Descrizione</h2>
 
       <p>
-        <strong>Zona:</strong>
-        {{mission.zone}}
+        {{mission.description}}
+      </p>
+
+      <div class="mission-meta">
+        {{#if mission.category_name}}
+          <span class="badge">{{mission.category_name}}</span>
+        {{else}}
+          <span class="badge">Senza categoria</span>
+        {{/if}}
+
+        <span class="badge badge-green">{{mission.points}} punti</span>
+        <span class="badge badge-yellow">{{mission.difficulty}}</span>
+        <span class="badge">{{mission.status}}</span>
+      </div>
+
+      <p>
+        <strong>Zona:</strong> {{mission.zone}}
       </p>
 
       {{#if mission.address}}
-      <p>
-        <strong>Indirizzo:</strong>
-        {{mission.address}}
-      </p>
-      {{else}}
-      <p>
-        <strong>Indirizzo:</strong>
-        Non specificato
-      </p>
+        <p>
+          <strong>Indirizzo:</strong> {{mission.address}}
+        </p>
+      {{/if}}
+
+      {{#if mission.latitude}}
+        <p>
+          <strong>Coordinate:</strong>
+          {{mission.latitude}}, {{mission.longitude}}
+        </p>
       {{/if}}
 
       <p>
-        <strong>Creatore:</strong>
-        {{mission.creator_name}}
+        <strong>Creata da:</strong> {{mission.creator_name}}
       </p>
 
       <p>
-        <strong>Data creazione:</strong>
-        {{mission.created_at}}
+        <strong>Data creazione:</strong> {{mission.created_at}}
       </p>
+
+      <div class="card-actions">
+        <a class="btn-secondary" href="/missions">Torna alle missioni</a>
+        <a class="btn-secondary" href="/missions/map">Vedi mappa</a>
+        <a class="btn-secondary" href="/missions/{{mission.id}}/qrcode">Mostra QR code</a>
+      </div>
     </div>
 
-    <div class="action-box">
-      <h2>Completa la sfida</h2>
-
-      <p>
-        Accetta la missione, completala nel mondo reale e invia una prova.
-        Il creatore potrà approvarla o rifiutarla.
-      </p>
+    <aside class="action-box">
+      <h2>Partecipa</h2>
 
       {{#if currentUser}}
-      {{#if (eq currentUser.id mission.creator_id)}}
-      <div class="info-box">
-        Sei il creatore di questa missione, quindi non puoi accettarla.
-      </div>
+        {{#if (eq currentUser.id mission.creator_id)}}
+          <div class="info-box">
+            Hai creato tu questa missione, quindi non puoi accettarla.
+          </div>
+        {{else}}
+          <p>
+            Accetta questa missione e invia una prova di completamento dalla tua dashboard.
+          </p>
+
+          <form action="/missions/{{mission.id}}/accept" method="post">
+            <button class="btn full-width" type="submit">
+              Accetta missione
+            </button>
+          </form>
+        {{/if}}
       {{else}}
-      <form action="/missions/{{mission.id}}/accept" method="post">
-        <button class="btn" type="submit">Accetta missione</button>
-      </form>
+        <p>
+          Effettua il login per accettare questa missione e partecipare alla sfida.
+        </p>
+
+        <div class="form-actions">
+          <a class="btn" href="/login">Accedi</a>
+          <a class="btn-secondary" href="/register">Registrati</a>
+        </div>
       {{/if}}
-      {{else}}
-      <a class="btn" href="/login">Accedi per accettare</a>
-      {{/if}}
-    </div>
+    </aside>
   </div>
 </section>

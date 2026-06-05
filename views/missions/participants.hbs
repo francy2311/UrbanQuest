@@ -1,0 +1,87 @@
+<section class="page-header">
+  <p class="eyebrow-dark">Gestione missione</p>
+  <h1>Partecipanti</h1>
+  <p>
+    Qui puoi vedere gli utenti che hanno accettato la missione
+    <strong>{{mission.title}}</strong> e controllare lo stato della loro partecipazione.
+  </p>
+</section>
+
+<div class="page-actions">
+  <a class="btn-secondary" href="/dashboard/my-missions">Torna alle mie missioni</a>
+  <a class="btn-secondary" href="/missions/{{mission.id}}">Dettaglio missione</a>
+</div>
+
+{{#if participants}}
+  <section class="participants-list">
+    {{#each participants}}
+      <article class="participant-card">
+        <div class="participant-main">
+          <div class="participant-avatar">
+            {{initial user_name}}
+          </div>
+
+          <div>
+            <h2>{{user_name}}</h2>
+            <p>{{user_email}}</p>
+            <p class="participant-points">{{user_points}} punti totali</p>
+          </div>
+        </div>
+
+        <div class="participant-status">
+          {{#if (eq status "accepted")}}
+            <span class="badge badge-yellow">accepted</span>
+          {{/if}}
+
+          {{#if (eq status "submitted")}}
+            <span class="badge badge-yellow">submitted</span>
+          {{/if}}
+
+          {{#if (eq status "approved")}}
+            <span class="badge badge-green">approved</span>
+          {{/if}}
+
+          {{#if (eq status "rejected")}}
+            <span class="badge badge-red">rejected</span>
+          {{/if}}
+        </div>
+
+        <div class="participant-info">
+          <p>
+            <strong>Data partecipazione:</strong>
+            {{created_at}}
+          </p>
+
+          {{#if updated_at}}
+            <p>
+              <strong>Ultimo aggiornamento:</strong>
+              {{updated_at}}
+            </p>
+          {{/if}}
+        </div>
+
+        {{#if proof_id}}
+          <div class="proof-text">
+            <strong>Prova inviata:</strong>
+            <p>{{proof_text}}</p>
+          </div>
+
+          {{#if proof_image_path}}
+            <div class="proof-image-box">
+              <strong>Foto prova:</strong>
+              <img src="{{proof_image_path}}" alt="Foto prova missione">
+            </div>
+          {{/if}}
+        {{else}}
+          <div class="empty-proof-box">
+            Nessuna prova inviata per ora.
+          </div>
+        {{/if}}
+      </article>
+    {{/each}}
+  </section>
+{{else}}
+  <div class="empty-state">
+    <p>Nessun utente ha ancora accettato questa missione.</p>
+  </div>
+{{/if}}
