@@ -1,0 +1,6 @@
+node_modules/
+urbanquest.sqlite
+.DS_Store
+.env
+public/uploads/proofs/*
+!public/uploads/proofs/.gitkeep
