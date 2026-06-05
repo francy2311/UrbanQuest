@@ -10,7 +10,7 @@ function findByEmail(email) {
 
 function findById(id) {
   return db.prepare(`
-    SELECT id, name, email, role, points, created_at
+    SELECT id, name, email, role, points, profile_image_path, created_at
     FROM users
     WHERE id = ?
   `).get(id);
@@ -33,6 +33,14 @@ function addPoints(userId, points) {
   `).run(points, userId);
 }
 
+function updateProfileImage(userId, profileImagePath) {
+  return db.prepare(`
+    UPDATE users
+    SET profile_image_path = ?
+    WHERE id = ?
+  `).run(profileImagePath, userId);
+}
+
 function findLeaderboard() {
   return db.prepare(`
     SELECT
@@ -40,7 +48,8 @@ function findLeaderboard() {
       name,
       email,
       role,
-      points
+      points,
+      profile_image_path
     FROM users
     WHERE role = 'user'
     ORDER BY points DESC, name ASC
@@ -52,5 +61,6 @@ module.exports = {
   findById,
   createUser,
   addPoints,
+  updateProfileImage,
   findLeaderboard
 };

@@ -1,18 +1,17 @@
+const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 
-const proofStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../../public/uploads/proofs'));
-  },
+const proofUploadDir = path.join(__dirname, '../../public/uploads/proofs');
+const profileUploadDir = path.join(__dirname, '../../public/uploads/profiles');
 
-  filename: (req, file, cb) => {
-    const extension = path.extname(file.originalname).toLowerCase();
-    const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1e9)}${extension}`;
+if (!fs.existsSync(proofUploadDir)) {
+  fs.mkdirSync(proofUploadDir, { recursive: true });
+}
 
-    cb(null, uniqueName);
-  }
-});
+if (!fs.existsSync(profileUploadDir)) {
+  fs.mkdirSync(profileUploadDir, { recursive: true });
+}
 
 function imageFileFilter(req, file, cb) {
   const allowedExtensions = ['.jpg', '.jpeg', '.png', '.webp'];
@@ -25,6 +24,32 @@ function imageFileFilter(req, file, cb) {
   cb(null, true);
 }
 
+const proofStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, proofUploadDir);
+  },
+
+  filename: (req, file, cb) => {
+    const extension = path.extname(file.originalname).toLowerCase();
+    const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1e9)}${extension}`;
+
+    cb(null, uniqueName);
+  }
+});
+
+const profileStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, profileUploadDir);
+  },
+
+  filename: (req, file, cb) => {
+    const extension = path.extname(file.originalname).toLowerCase();
+    const uniqueName = `profile-${Date.now()}-${Math.round(Math.random() * 1e9)}${extension}`;
+
+    cb(null, uniqueName);
+  }
+});
+
 const uploadProofImage = multer({
   storage: proofStorage,
   fileFilter: imageFileFilter,
@@ -33,6 +58,15 @@ const uploadProofImage = multer({
   }
 });
 
+const uploadProfileImage = multer({
+  storage: profileStorage,
+  fileFilter: imageFileFilter,
+  limits: {
+    fileSize: 2 * 1024 * 1024
+  }
+});
+
 module.exports = {
-  uploadProofImage
+  uploadProofImage,
+  uploadProfileImage
 };

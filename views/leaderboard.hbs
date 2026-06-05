@@ -20,9 +20,13 @@
     </div>
 
     <div class="leaderboard-user">
+      {{#if profile_image_path}}
+      <img class="avatar-img" src="{{profile_image_path}}" alt="Foto profilo">
+      {{else}}
       <div class="avatar">
         {{initial name}}
       </div>
+      {{/if}}
 
       <div>
         <strong>{{name}}</strong>

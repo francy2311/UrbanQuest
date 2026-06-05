@@ -66,6 +66,7 @@ function findByMissionIdForCreator(missionId) {
       users.name AS user_name,
       users.email AS user_email,
       users.points AS user_points,
+      users.profile_image_path AS user_profile_image_path,
 
       proofs.id AS proof_id,
       proofs.text AS proof_text,

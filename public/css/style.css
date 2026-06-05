@@ -1354,3 +1354,85 @@ select {
   color: #64748b;
   font-weight: 800;
 }
+/* =========================================================
+   FOTO PROFILO UTENTE
+   ========================================================= */
+
+.profile-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 30px;
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 28px;
+}
+
+.profile-preview {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.profile-preview img,
+.profile-placeholder {
+  width: 86px;
+  height: 86px;
+  border-radius: 28px;
+  object-fit: cover;
+  flex: 0 0 86px;
+}
+
+.profile-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  color: white;
+  font-size: 34px;
+  font-weight: 950;
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.22);
+}
+
+.profile-preview h2 {
+  margin: 0 0 5px;
+  font-size: 28px;
+}
+
+.profile-preview p {
+  margin: 0 0 10px;
+  color: var(--muted);
+}
+
+.profile-upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.avatar-img {
+  width: 46px;
+  height: 46px;
+  border-radius: 16px;
+  object-fit: cover;
+  border: 2px solid #dbe3ef;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.10);
+}
+
+.participant-avatar-img {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  object-fit: cover;
+  border: 2px solid #dbe3ef;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.10);
+}
+
+@media (max-width: 850px) {
+  .profile-panel {
+    grid-template-columns: 1fr;
+  }
+}

@@ -2,8 +2,48 @@
   <h1>Dashboard</h1>
   <p>
     Ciao {{currentUser.name}}, da qui puoi gestire le tue missioni, controllare i progressi
-    e vedere i badge ottenuti.
+    e aggiornare il tuo profilo.
   </p>
+</section>
+
+<section class="profile-panel">
+  <div class="profile-preview">
+    {{#if user.profile_image_path}}
+      <img src="{{user.profile_image_path}}" alt="Foto profilo">
+    {{else}}
+      <div class="profile-placeholder">
+        {{initial user.name}}
+      </div>
+    {{/if}}
+
+    <div>
+      <h2>{{user.name}}</h2>
+      <p>{{user.email}}</p>
+      <span class="badge badge-green">{{user.points}} punti</span>
+    </div>
+  </div>
+
+  <form
+    action="/profile/photo"
+    method="post"
+    enctype="multipart/form-data"
+    class="profile-upload-form"
+  >
+    <div class="form-group">
+      <label for="profileImage">Foto profilo</label>
+      <input
+        type="file"
+        id="profileImage"
+        name="profileImage"
+        accept=".jpg,.jpeg,.png,.webp"
+      >
+      <small class="form-help">
+        Formati consentiti: JPG, JPEG, PNG, WEBP. Dimensione massima: 2 MB.
+      </small>
+    </div>
+
+    <button class="btn" type="submit">Aggiorna foto</button>
+  </form>
 </section>
 
 <section class="dashboard-grid">
@@ -15,7 +55,7 @@
 
   <article class="dashboard-card">
     <h2>Missioni create</h2>
-    <p>Visualizza le prove ricevute per le missioni che hai pubblicato.</p>
+    <p>Visualizza le prove ricevute e i partecipanti delle missioni che hai pubblicato.</p>
     <a class="btn-secondary" href="/dashboard/my-missions">Vai alle missioni</a>
   </article>
 

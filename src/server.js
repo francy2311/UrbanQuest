@@ -9,6 +9,7 @@ const missionRoutes = require('./routes/missionRoutes');
 const proofRoutes = require('./routes/proofRoutes');
 const leaderboardRoutes = require('./routes/leaderboardRoutes');
 const qrRoutes = require('./routes/qrRoutes');
+const profileRoutes = require('./routes/profileRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -105,7 +106,7 @@ app.use(missionRoutes);
 app.use(proofRoutes);
 app.use(leaderboardRoutes);
 app.use(qrRoutes);
-
+app.use(profileRoutes);
 
 /* =========================
    ERRORE 404

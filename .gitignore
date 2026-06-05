@@ -4,3 +4,5 @@ urbanquest.sqlite
 .env
 public/uploads/proofs/*
 !public/uploads/proofs/.gitkeep
+public/uploads/profiles/*
+!public/uploads/profiles/.gitkeep
