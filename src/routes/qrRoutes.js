@@ -14,7 +14,9 @@ router.get('/missions/:id/qrcode', async (req, res) => {
   }
 
   try {
-    const missionUrl = `${req.protocol}://${req.get('host')}/missions/${mission.id}`;
+    const missionUrl = mission.is_hidden
+      ? `${req.protocol}://${req.get('host')}/missions/unlock/${mission.unlock_code}`
+      : `${req.protocol}://${req.get('host')}/missions/${mission.id}`;
 
     const qrCodeDataUrl = await QRCode.toDataURL(missionUrl, {
       width: 320,

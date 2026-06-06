@@ -29,10 +29,12 @@ const insertMission = db.prepare(`
     difficulty,
     points,
     status,
+    is_hidden,
+    unlock_code,
     category_id,
     creator_id
   )
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 `);
 
 const transaction = db.transaction(() => {
@@ -84,6 +86,8 @@ const transaction = db.transaction(() => {
     'easy',
     20,
     'open',
+    0,
+    null,
     campusCategory.lastInsertRowid,
     adminResult.lastInsertRowid
   );
@@ -98,6 +102,8 @@ const transaction = db.transaction(() => {
     'medium',
     40,
     'open',
+    0,
+    null,
     photoCategory.lastInsertRowid,
     adminResult.lastInsertRowid
   );
@@ -112,6 +118,8 @@ const transaction = db.transaction(() => {
     'hard',
     70,
     'open',
+    0,
+    null,
     cultureCategory.lastInsertRowid,
     userResult.lastInsertRowid
   );

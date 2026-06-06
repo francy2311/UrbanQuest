@@ -9,6 +9,9 @@ const router = express.Router();
 function isValidDifficulty(difficulty) {
   return ['easy', 'medium', 'hard'].includes(difficulty);
 }
+function generateUnlockCode() {
+  return Math.random().toString(36).substring(2, 10);
+}
 
 /* =========================
    LISTA MISSIONI
@@ -73,6 +76,8 @@ router.post('/missions/create', requireAuth, (req, res) => {
   const difficulty = String(req.body.difficulty || '').trim();
   const points = Number(req.body.points);
   const categoryId = req.body.categoryId ? Number(req.body.categoryId) : null;
+  const isHidden = req.body.isHidden === 'on';
+  const unlockCode = isHidden ? generateUnlockCode() : null;
 
   if (!title || !description || !zone || !difficulty || !points) {
     req.session.error = 'Compila tutti i campi obbligatori.';
@@ -121,6 +126,8 @@ router.post('/missions/create', requireAuth, (req, res) => {
     longitude,
     difficulty,
     points,
+    isHidden,
+    unlockCode,
     categoryId,
     creatorId: req.session.user.id
   });
@@ -200,6 +207,53 @@ router.get('/missions/:id/participants', requireAuth, (req, res) => {
     mission,
     participants
   });
+});
+
+/* =========================
+   SBLOCCO MISSIONE SEGRETA DA QR CODE
+========================= */
+
+router.get('/missions/unlock/:code', requireAuth, (req, res) => {
+  const unlockCode = req.params.code;
+  const mission = missionRepository.findByUnlockCode(unlockCode);
+
+  if (!mission) {
+    req.session.error = 'Missione segreta non trovata.';
+    return res.redirect('/missions');
+  }
+
+  if (mission.status !== 'open') {
+    req.session.error = 'Questa missione non è più disponibile.';
+    return res.redirect('/missions');
+  }
+
+  if (!mission.is_hidden) {
+    req.session.error = 'Questa missione non è segreta.';
+    return res.redirect(`/missions/${mission.id}`);
+  }
+
+  if (mission.creator_id === req.session.user.id) {
+    req.session.error = 'Hai creato tu questa missione, quindi non puoi sbloccarla.';
+    return res.redirect(`/missions/${mission.id}`);
+  }
+
+  const existingParticipation = participationRepository.findByMissionAndUser(
+    mission.id,
+    req.session.user.id
+  );
+
+  if (existingParticipation) {
+    req.session.success = 'Missione già presente tra le tue partecipazioni.';
+    return res.redirect('/dashboard/my-participations');
+  }
+
+  participationRepository.create({
+    missionId: mission.id,
+    userId: req.session.user.id
+  });
+
+  req.session.success = 'Missione segreta sbloccata correttamente.';
+  res.redirect('/dashboard/my-participations');
 });
 
 /* =========================

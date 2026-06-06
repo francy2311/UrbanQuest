@@ -16,10 +16,15 @@
       </p>
 
       <div class="mission-meta">
-        {{#if mission.category_name}}
-          <span class="badge">{{mission.category_name}}</span>
+        {{#if mission.is_hidden}}
+        <span class="badge badge-red">Segreta</span>
         {{else}}
-          <span class="badge">Senza categoria</span>
+        <span class="badge badge-green">Pubblica</span>
+        {{/if}}
+        {{#if mission.category_name}}
+        <span class="badge">{{mission.category_name}}</span>
+        {{else}}
+        <span class="badge">Senza categoria</span>
         {{/if}}
 
         <span class="badge badge-green">{{mission.points}} punti</span>
@@ -32,16 +37,16 @@
       </p>
 
       {{#if mission.address}}
-        <p>
-          <strong>Indirizzo:</strong> {{mission.address}}
-        </p>
+      <p>
+        <strong>Indirizzo:</strong> {{mission.address}}
+      </p>
       {{/if}}
 
       {{#if mission.latitude}}
-        <p>
-          <strong>Coordinate:</strong>
-          {{mission.latitude}}, {{mission.longitude}}
-        </p>
+      <p>
+        <strong>Coordinate:</strong>
+        {{mission.latitude}}, {{mission.longitude}}
+      </p>
       {{/if}}
 
       <p>
@@ -52,7 +57,7 @@
         <strong>Data creazione:</strong> {{mission.created_at}}
       </p>
 
-      <div class="card-actions">
+      <div class="detail-actions">
         <a class="btn-secondary" href="/missions">Torna alle missioni</a>
         <a class="btn-secondary" href="/missions/map">Vedi mappa</a>
         <a class="btn-secondary" href="/missions/{{mission.id}}/qrcode">Mostra QR code</a>
@@ -63,30 +68,30 @@
       <h2>Partecipa</h2>
 
       {{#if currentUser}}
-        {{#if (eq currentUser.id mission.creator_id)}}
-          <div class="info-box">
-            Hai creato tu questa missione, quindi non puoi accettarla.
-          </div>
-        {{else}}
-          <p>
-            Accetta questa missione e invia una prova di completamento dalla tua dashboard.
-          </p>
-
-          <form action="/missions/{{mission.id}}/accept" method="post">
-            <button class="btn full-width" type="submit">
-              Accetta missione
-            </button>
-          </form>
-        {{/if}}
+      {{#if (eq currentUser.id mission.creator_id)}}
+      <div class="info-box">
+        Hai creato tu questa missione, quindi non puoi accettarla.
+      </div>
       {{else}}
-        <p>
-          Effettua il login per accettare questa missione e partecipare alla sfida.
-        </p>
+      <p>
+        Accetta questa missione e invia una prova di completamento dalla tua dashboard.
+      </p>
 
-        <div class="form-actions">
-          <a class="btn" href="/login">Accedi</a>
-          <a class="btn-secondary" href="/register">Registrati</a>
-        </div>
+      <form action="/missions/{{mission.id}}/accept" method="post">
+        <button class="btn full-width" type="submit">
+          Accetta missione
+        </button>
+      </form>
+      {{/if}}
+      {{else}}
+      <p>
+        Effettua il login per accettare questa missione e partecipare alla sfida.
+      </p>
+
+      <div class="form-actions">
+        <a class="btn" href="/login">Accedi</a>
+        <a class="btn-secondary" href="/register">Registrati</a>
+      </div>
       {{/if}}
     </aside>
   </div>

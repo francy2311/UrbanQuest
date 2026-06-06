@@ -1,9 +1,17 @@
 <section class="page-header narrow-page">
   <p class="eyebrow-dark">QR Code missione</p>
   <h1>{{mission.title}}</h1>
-  <p>
-    Scansiona il QR code per aprire rapidamente il dettaglio della missione.
-  </p>
+
+  {{#if mission.is_hidden}}
+    <p>
+      Questa è una missione segreta. Il QR code permette a un utente autenticato
+      di sbloccarla e aggiungerla automaticamente alle proprie missioni accettate.
+    </p>
+  {{else}}
+    <p>
+      Scansiona il QR code per aprire rapidamente il dettaglio della missione.
+    </p>
+  {{/if}}
 </section>
 
 <section class="qr-card">
@@ -12,12 +20,21 @@
   </div>
 
   <div class="qr-info">
-    <h2>Condividi questa missione</h2>
+    {{#if mission.is_hidden}}
+      <h2>Sblocca missione segreta</h2>
 
-    <p>
-      Questo QR code porta direttamente alla pagina dettaglio della missione.
-      Può essere mostrato, condiviso o stampato.
-    </p>
+      <p>
+        Questo QR code porta a una rotta di sblocco. Quando un utente loggato
+        lo apre, la missione viene aggiunta automaticamente alle sue partecipazioni.
+      </p>
+    {{else}}
+      <h2>Condividi questa missione</h2>
+
+      <p>
+        Questo QR code porta direttamente alla pagina dettaglio della missione.
+        Può essere mostrato, condiviso o stampato.
+      </p>
+    {{/if}}
 
     <div class="qr-link-box">
       {{missionUrl}}
@@ -25,7 +42,7 @@
 
     <div class="form-actions">
       <a class="btn" href="/missions/{{mission.id}}">Torna alla missione</a>
-      <a class="btn-secondary" href="/missions">Tutte le missioni</a>
+      <a class="btn-secondary" href="/dashboard/my-missions">Missioni create</a>
     </div>
   </div>
 </section>

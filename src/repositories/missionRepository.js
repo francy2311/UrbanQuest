@@ -13,6 +13,8 @@ function findAllOpen(filters = {}) {
       missions.difficulty,
       missions.points,
       missions.status,
+      missions.is_hidden,
+      missions.unlock_code,
       missions.created_at,
       categories.name AS category_name,
       users.name AS creator_name
@@ -20,6 +22,7 @@ function findAllOpen(filters = {}) {
     LEFT JOIN categories ON categories.id = missions.category_id
     JOIN users ON users.id = missions.creator_id
     WHERE missions.status = 'open'
+      AND missions.is_hidden = 0
   `;
 
   const params = [];
@@ -55,10 +58,12 @@ function findAllWithCoordinates() {
       missions.longitude,
       missions.points,
       missions.difficulty,
+      missions.is_hidden,
       categories.name AS category_name
     FROM missions
     LEFT JOIN categories ON categories.id = missions.category_id
     WHERE missions.status = 'open'
+      AND missions.is_hidden = 0
       AND missions.latitude IS NOT NULL
       AND missions.longitude IS NOT NULL
     ORDER BY missions.id DESC
@@ -78,6 +83,8 @@ function findById(id) {
       missions.difficulty,
       missions.points,
       missions.status,
+      missions.is_hidden,
+      missions.unlock_code,
       missions.created_at,
       categories.name AS category_name,
       users.name AS creator_name,
@@ -89,6 +96,32 @@ function findById(id) {
   `).get(id);
 }
 
+function findByUnlockCode(unlockCode) {
+  return db.prepare(`
+    SELECT
+      missions.id,
+      missions.title,
+      missions.description,
+      missions.zone,
+      missions.address,
+      missions.latitude,
+      missions.longitude,
+      missions.difficulty,
+      missions.points,
+      missions.status,
+      missions.is_hidden,
+      missions.unlock_code,
+      missions.created_at,
+      categories.name AS category_name,
+      users.name AS creator_name,
+      users.id AS creator_id
+    FROM missions
+    LEFT JOIN categories ON categories.id = missions.category_id
+    JOIN users ON users.id = missions.creator_id
+    WHERE missions.unlock_code = ?
+  `).get(unlockCode);
+}
+
 function create({
   title,
   description,
@@ -98,6 +131,8 @@ function create({
   longitude,
   difficulty,
   points,
+  isHidden,
+  unlockCode,
   categoryId,
   creatorId
 }) {
@@ -112,10 +147,12 @@ function create({
       difficulty,
       points,
       status,
+      is_hidden,
+      unlock_code,
       category_id,
       creator_id
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'open', ?, ?)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'open', ?, ?, ?, ?)
   `).run(
     title,
     description,
@@ -125,6 +162,8 @@ function create({
     longitude || null,
     difficulty,
     points,
+    isHidden ? 1 : 0,
+    unlockCode || null,
     categoryId || null,
     creatorId
   );
@@ -145,6 +184,8 @@ function findByCreatorId(creatorId) {
       missions.difficulty,
       missions.points,
       missions.status,
+      missions.is_hidden,
+      missions.unlock_code,
       missions.created_at,
       categories.name AS category_name
     FROM missions
@@ -158,6 +199,7 @@ module.exports = {
   findAllOpen,
   findAllWithCoordinates,
   findById,
+  findByUnlockCode,
   create,
   findByCreatorId
 };

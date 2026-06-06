@@ -1,10 +1,10 @@
+DROP TABLE IF EXISTS user_badges;
+DROP TABLE IF EXISTS badges;
 DROP TABLE IF EXISTS proofs;
 DROP TABLE IF EXISTS mission_participations;
 DROP TABLE IF EXISTS missions;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS user_badges;
-DROP TABLE IF EXISTS badges;
 
 CREATE TABLE users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -36,6 +36,8 @@ CREATE TABLE missions (
     CHECK (points > 0),
   status TEXT NOT NULL DEFAULT 'open'
     CHECK (status IN ('open', 'closed')),
+  is_hidden INTEGER NOT NULL DEFAULT 0 CHECK (is_hidden IN (0,1)),
+  unlock_code TEXT UNIQUE,
   category_id INTEGER,
   creator_id INTEGER NOT NULL,
   created_at TEXT NOT NULL DEFAULT (datetime('now')),
