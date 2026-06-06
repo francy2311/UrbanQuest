@@ -583,18 +583,6 @@ npm run db:seed
 ---
 
 ## 🧹 Note per la consegna
-
-Prima della consegna, lo zip o il repository non deve contenere:
-
-```text
-node_modules/
-urbanquest.sqlite
-.DS_Store
-__MACOSX/
-public/uploads/proofs/*
-public/uploads/profiles/*
-```
-
 Il docente può ricreare l’ambiente eseguendo:
 
 ```bash
